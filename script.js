@@ -17,6 +17,9 @@ function Book(t, a, r, identity) {
     this.author = a;
     this.read = r;
     this.id = identity;
+
+    makeBookCard(this);
+
 }
 
 Book.prototype.change_read = function() {
@@ -43,7 +46,7 @@ function submitBook(event) {
 
     let book = new Book(t, a, true, "id" + number_of_books);
 
-    makeBookCard(book);
+    // makeBookCard(book);
 
     event.preventDefault();
 }
@@ -51,6 +54,8 @@ function submitBook(event) {
 
 
 document.getElementById("add-book-button").addEventListener('click', submitBook);
+
+
 
 
 /**
@@ -63,7 +68,14 @@ function makeBookCard(b) {
     
     // set the state
     root.id = "" + number_of_books;
+    number_of_books++;
+    root.style.backgroundColor = "brown";
+    root.style.borderColor = "black";
+    root.style.borderStyle = "solid";
+    root.style.borderWidth = "1px";
+    root.style.minHeight = "145px";
 
+    root.book = b;
     
     // append the element
     document.getElementById('books').appendChild(root);
@@ -86,9 +98,34 @@ function makeBookCard(b) {
     read_shape.innerHTML = checkRead(b);
     
     document.getElementById(root.id).appendChild(read_shape);
+
+    let deleteButton = document.createElement("button");
+
+    deleteButton.innerHTML = "delete";
+    deleteButton.addEventListener("click", deleteCard);
+
+    document.getElementById(root.id).appendChild(deleteButton);
+
+    
+
+
+
+    // reset variables
+
+
+    root = undefined;
+    
     
 
 }
+
+function deleteCard(event) {
+
+    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+}
+
+
+
 
 
 /**

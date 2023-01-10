@@ -1,0 +1,8 @@
+.bookshelf {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(125px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(125px, 1fr));
+
+    gap: 10px;
+    
+}
